@@ -1,0 +1,131 @@
+<!doctype html>
+<html manifest="index.appcache">
+<head>
+    <meta charset="utf-8">
+    <title>enbici</title>
+    <meta name="description" content="enbici te permite obtener el estado de las estaciones de bicis públicas en España más cercanas a ti.">
+    <meta name="author" content="Juan Carlos Alonso (@l_h2o_l)">
+    <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- For iPhone 4 with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/Icon@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/images/Icon.png">
+    <link rel="apple-touch-startup-image" href="assets/images/Default.png">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="./lungo.js/lungo-1.1.2.min.css">
+    <link rel="stylesheet" href="./lungo.js/lungo.theme.default.css">
+    <link rel="stylesheet" href="./assets/stylesheets/enbici.theme.css">
+    <link rel="stylesheet" href="./lungo.js/sugars/Growl/lungo.sugar.growl.css">
+
+</head>
+
+<body class="app">
+        <!-- ============================= enbici - MainView ============================= -->
+
+    <section id="main">
+        <header>
+			
+			<nav class="onleft">
+				
+				<a class="hidden" id="btnShowMapView" href="#enbici-mapView" data-target="article" data-icon="map" ></a>
+				<a id="btnListMapView" href="#enbici-listView" data-target="article" data-icon="items" class="current"></a>
+	   
+			</nav>	
+					
+			<nav class="onright">
+				<a id="btnRefresh" href="#" data-target="#" data-icon="refresh"></a>
+				<a id="btnProviders" href="#preferencesView" data-target="section" data-icon="settings"><abbr>Providers</abbr></a>
+			</nav>
+			<div class="center"><img src="assets/images/titleLogo.png"></div>
+        </header>
+
+        <article id="enbici-listView" class="list"></article>
+        <article id="enbici-mapView"></article>
+        <article id="enbici-favourites">Favs</article>
+        <article id="enbici-about">About</article>
+
+        <footer class="toolbar">
+		<nav>
+        	<a href="#enbici-listView" data-target="article"><img src="assets/images/47-bicycle.png" alt="enbici icon"/></a>
+			<a href="#enbici-favourites" data-target="article" data-icon="star" ></a>
+			<a href="#enbici-about" data-target="article" data-icon="info" ></a>
+        </nav>
+		</footer>
+    </section>
+
+        <!-- ============================= enbici - stationDetail ============================= -->
+
+    <section id="stationDetail">
+         <header data-title="Station detail">
+            <!-- <a href="#back" data-target="section" class="clear" data-icon="home"></a> -->
+            <a href="#back" data-target="section" data-icon="left"></a>       
+
+
+
+            <nav class="onright">
+                <a id="btnOptions" href="#" data-target="#" data-icon="upload clear"></a>
+            </nav>
+<!--             <div class="center"><img src="assets/images/titleLogo.png"></div>
+ -->        </header>
+        
+        <article id='stationDetailWrap' class="list">
+            <div class="indented">
+                <ul>
+                    <li class="tip darker" data-icon="info">
+                        <small>Station name</small>
+                        <span id='stationName'></span>
+                    </li>
+                    <li class="anchor">Availability information</li>
+                    <li id="swipe" data-icon="upload">
+                        <span class='detailSubtitles' id='availablebikes'></span> Available bikes
+                    </li>
+                    <li id="swipe" data-icon="download">
+                        <span class='detailSubtitles' id='availableSlots'></span> Available Locks
+                    </li>
+                </ul>
+            </div>        
+            <div id="stationDetailMap"></div>
+        </article>
+
+        <footer class="toolbar">
+            <nav>
+                <a href="#main article#enbici-listView" data-target="section" data-icon="map" ></a>
+                <a href="#main article#enbici-favourites" data-target="section" data-icon="star" ></a>
+                <a href="#main article#enbici-about" data-target="section" data-icon="info" ></a>
+            </nav>
+        </footer>
+    </section>
+
+        <!-- ============================= enbici - Preferences ============================= -->
+    <section id="preferencesView">
+         <header data-back="left" data-title="Providers"></header>
+
+            <div class="center"><img src="assets/images/titleLogo.png"></div>
+        </header>
+
+        <article id="enbici-providersView" class="list"></article>
+
+
+    </section>    
+
+
+	<!-- LungoJS (Production mode) -->
+    <script src="lungo.js/lungo-1.1.2.packed.js"></script>
+	<!-- set sensor to true if your are running me from a mobile device -->
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="lungo.js/sugars/geolocation/lungo.sugar.geolocation.js"></script>
+    <script src="lungo.js/sugars/Growl/lungo.sugar.growl.js"></script>
+    <!-- LungoJS - Sandbox App -->
+    <script src="app/app.js"></script>
+    <script src="app/data.js"></script>
+    <script src="app/events.js"></script>
+    <script src="app/services.js"></script>
+    <script src="app/view.js"></script>
+</body>
+</html>
+
