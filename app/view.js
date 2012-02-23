@@ -19,6 +19,14 @@ App.View = (function(lng, app, undefined) {
 				<small>{{serviceName}}</small>\
 	        </li>'
 	    );
+
+	lng.View.Template.create(
+			'favoritesList-tmp',
+			'<li id="favStationID-{{id_station}}" class="selectable" data-icon="info">\
+	        	<div class="onright">{{updated}}</div>\
+	        	{{stationName}}\
+	       	</li>'
+		);
  
 
 	var providers = function(providers) {
@@ -34,6 +42,7 @@ App.View = (function(lng, app, undefined) {
             if (result.length > 0) {
                 var data = result[0];
 
+                lng.dom('#stationDetailID').attr("value",data.id_station);
                 lng.dom('#stationName').html(data.stationName);
                 lng.dom('#availablebikes').html(data.availablebikes);
                 lng.dom('#availableSlots').html(data.availableSlots);
@@ -44,10 +53,23 @@ App.View = (function(lng, app, undefined) {
 				lng.Router.section('#stationDetail');
             }
         });
-    };	
+    };
+
+    var favorites = function(){
+    	lng.Data.Sql.select('favorites',null,function(result){
+    		if(result.length > 0){
+    			lng.View.Template.List.create({
+    				container_id: 'enbici-favourites',
+    				template_id: 'favoritesList-tmp',
+    				data:result
+    			});
+    		}            
+        });
+    }	
 		return{
 			providers:providers,
-			stationDetail:stationDetail
+			stationDetail:stationDetail,
+			favorites:favorites
     }
 
 })(LUNGO, App);

@@ -1,12 +1,12 @@
 App.Services = (function(lng, app, undefined) {
 
-var enbiciApi = "http://192.168.1.19/";
+var enbiciApi = "http://localhost/";
 //var enbiciApi = "http://enbici.trifase.net/api/";
 
 var obtStationsStatus = function(id_service) {
 	$$.get(enbiciApi+'StationsStatus.json',
 		{
-			'function':'stations',
+			function:'stations',
 			id_service:id_service
 		},
 		function(response){

@@ -46,13 +46,13 @@
 
         <article id="enbici-listView" class="list"></article>
         <article id="enbici-mapView"></article>
-        <article id="enbici-favourites">Favs</article>
+        <article id="enbici-favourites" class="list"></article>
         <article id="enbici-about">About</article>
 
         <footer class="toolbar">
 		<nav>
         	<a href="#enbici-listView" data-target="article"><img src="assets/images/47-bicycle.png" alt="enbici icon"/></a>
-			<a href="#enbici-favourites" data-target="article" data-icon="star" ></a>
+			<a href="#enbici-favourites" id="btnShowFavs" data-target="article" data-icon="star" ></a>
 			<a href="#enbici-about" data-target="article" data-icon="info" ></a>
         </nav>
 		</footer>
@@ -62,8 +62,7 @@
 
     <section id="stationDetail">
          <header data-title="Station detail">
-            <!-- <a href="#back" data-target="section" class="clear" data-icon="home"></a> -->
-            <a href="#back" data-target="section" data-icon="left"></a>       
+             <a href="#back" data-target="section" class="button" data-icon="home"></a>       
 
 
 
@@ -76,6 +75,7 @@
         <article id='stationDetailWrap' class="list">
             <div class="indented">
                 <ul>
+                    <input type="hidden" id="stationDetailID" value="0" />
                     <li class="tip darker" data-icon="info">
                         <small>Station name</small>
                         <span id='stationName'></span>

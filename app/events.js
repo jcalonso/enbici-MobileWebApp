@@ -94,6 +94,17 @@ App.Events = (function(lng, app, undefined) {
 
 	});
 
+	//Show station details from a favorite station
+	lng.dom("article#enbici-favourites li").tap(function(event){
+		var stationID = lng.dom(this);
+		
+		var cleanStationID = stationID.attr('id').split("-");
+			
+		App.View.stationDetail(cleanStationID[1]);
+				
+
+	});
+
 	//Provider selected
 	lng.dom("article#enbici-providersView li").tap(function(event){
 		
@@ -117,9 +128,11 @@ App.Events = (function(lng, app, undefined) {
                 icon: 'star',
                 color: 'yellow',
                 callback: function(){
-                    App.Data.removeTodo(current_todo.id);
-                    App.View.returnToMain('ToDo deleted', 'trash');
-                }
+                			var id_station = lng.dom("#stationDetailID").attr("value");
+         			     	App.Data.addFavoriteStation(id_station);
+         			     	lng.Sugar.Growl.show('Favorite added', 'Favorite added', 'check', true, 1);
+
+		       		 	}
             },
             {
                 name: 'Cancel',
@@ -131,6 +144,11 @@ App.Events = (function(lng, app, undefined) {
             }
         ];
         lng.Sugar.Growl.option('Options', options);
+	});
+
+	//Show user favorites
+	lng.dom('#btnShowFavs').tap(function(event){
+		App.View.favorites();
 
 	});
 

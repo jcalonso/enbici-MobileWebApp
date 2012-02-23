@@ -5,7 +5,7 @@ App.Data = (function(lng, app, undefined) {
     	version:'1.0',
     	schema:[{
     		name:'providers',
-    		drop:true,
+    		drop:false,
     		fields:{
     			geoLocStations: "INT",
 				id_service: "INT",
@@ -37,9 +37,7 @@ App.Data = (function(lng, app, undefined) {
                 id_service: "INT",
                 lat: "STRING",
                 lng: "STRING",
-                stationName: "STRING",
-                stationStatus: "STRING",
-                updated: "STRING",
+                stationName: "STRING"
             }
         },
         {
@@ -70,10 +68,44 @@ App.Data = (function(lng, app, undefined) {
         lng.Data.Sql.insert('preferences',id_service);
     };
 
+    var addFavoriteStation = function(id_station){
+        //Check if this stattion is already on favs
+        lng.Data.Sql.select('favorites',{'id_station':id_station},function(resFavorites){
+            if(resFavorites.length == 0){
+
+                lng.Data.Sql.select('preferences', null, function(result) {
+                 if(result.length > 0){
+                    lng.Data.Sql.select('stationsStatus',{'id_station':id_station},function(result2){
+
+                        var markers = [];
+                        for(index in result2)
+                        {
+                            var newMarker = {
+                                id_station:result2[index].id_station,
+                                lat:result2[index].lat,
+                                lng:result2[index].lng,
+                                stationName:result2[index].stationName,
+                                id_service:result[0].id_service
+                            };
+
+                            markers.push(newMarker);
+                        }
+
+                        lng.Data.Sql.insert('favorites',markers);
+
+                    });
+                }
+               });  
+            }      
+        });    
+    };
+
+
     return {
     	cacheProviders:cacheProviders,
     	cacheStationsStatus:cacheStationsStatus,
-        saveDefaultProvider:saveDefaultProvider
+        saveDefaultProvider:saveDefaultProvider,
+        addFavoriteStation: addFavoriteStation
     }
 
 })(LUNGO, App);
