@@ -1,6 +1,6 @@
 App.Services = (function(lng, app, undefined) {
 
-var enbiciApi = "http://localhost/";
+var enbiciApi = "http://192.168.1.19/";
 //var enbiciApi = "http://enbici.trifase.net/api/";
 
 var obtStationsStatus = function(id_service) {
@@ -17,11 +17,9 @@ var obtStationsStatus = function(id_service) {
 			}
 			
 			App.Data.cacheStationsStatus(response.Stations);
-			lng.View.Template.List.create({
-	            container_id: 'enbici-listView',
-	            template_id: 'stationsListView-tmp',
-	            data: stations
-            	})
+			lng.View.Template.binding('enbici-listView-data', 'stationsListView-tmp', stations);
+			lng.View.Scroll.create('enbici-listView');
+
 		}
 	);
    

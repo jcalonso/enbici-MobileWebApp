@@ -67,17 +67,28 @@ App.Events = (function(lng, app, undefined) {
 			var markers = [];
 			for(index in result)
 			{
+				var iconImg;
+
+				if(result[index].availablebikes == 0){
+					iconImg = "assets/images/enbiciPinRed.png";
+				}
+				else if(result[index].availablebikes > 0 && result[index].availablebikes < 3){
+					iconImg = "assets/images/enbiciPinYellow.png";
+				}
+				else{
+					iconImg = "assets/images/enbiciPin.png";
+				}
+
 				var newMarker = {
 					lat:result[index].lat,
 					lng:result[index].lng,
-					title:result[index].stationName
+					title:result[index].stationName,
+					icon:iconImg
 				};
-
 				markers.push(newMarker);
 			}
 
 			
-			//console.error(markers);
 			LUNGO.Sugar.Geolocation.setMap('enbici-mapView',true,markers);
 		});
         

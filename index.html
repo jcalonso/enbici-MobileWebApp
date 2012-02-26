@@ -32,8 +32,8 @@
 			
 			<nav class="onleft">
 				
-				<a class="hidden" id="btnShowMapView" href="#enbici-mapView" data-target="article" data-icon="map" ></a>
-				<a id="btnListMapView" href="#enbici-listView" data-target="article" data-icon="items" class="current"></a>
+				<a id="btnShowMapView" href="#enbici-mapView" data-target="article" data-icon="map" ></a>
+				<a class="hidden" id="btnListMapView" href="#enbici-listView" data-target="article" data-icon="items" class="current"></a>
 	   
 			</nav>	
 					
@@ -44,9 +44,17 @@
 			<div class="center"><img src="assets/images/titleLogo.png"></div>
         </header>
 
-        <article id="enbici-listView" class="list"></article>
+        <article id="enbici-listView" class="list" >
+        <!-- <ul>
+            <li class="anchor updatedTime">Leganés - Enbici Leganés <span data-icon="clock">23:00</span></li>
+        </ul> -->
+            
+        <ul id="enbici-listView-data"></ul>
+            
+        </article>
+
         <article id="enbici-mapView"></article>
-        <article id="enbici-favourites" class="list"></article>
+        <article id="enbici-favourites" class="list scrollable"></article>
         <article id="enbici-about">About</article>
 
         <footer class="toolbar">
@@ -92,13 +100,7 @@
             <div id="stationDetailMap"></div>
         </article>
 
-        <footer class="toolbar">
-            <nav>
-                <a href="#main article#enbici-listView" data-target="section" data-icon="map" ></a>
-                <a href="#main article#enbici-favourites" data-target="section" data-icon="star" ></a>
-                <a href="#main article#enbici-about" data-target="section" data-icon="info" ></a>
-            </nav>
-        </footer>
+ 
     </section>
 
         <!-- ============================= enbici - Preferences ============================= -->
@@ -108,7 +110,7 @@
             <div class="center"><img src="assets/images/titleLogo.png"></div>
         </header>
 
-        <article id="enbici-providersView" class="list"></article>
+        <article id="enbici-providersView" class="list scrollable"></article>
 
 
     </section>    

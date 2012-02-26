@@ -31,3 +31,9 @@
 	width: 100%;
 	height:100%;	
 }
+
+.updatedTime{
+	background-color:#a6e133 !important;
+	color:#FFF !important;
+	opacity: 0.8 !important;
+}

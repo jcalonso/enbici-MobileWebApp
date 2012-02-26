@@ -16,6 +16,24 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 	var _markers = false;
 	var _userPositionImg = "/lungo.js/sugars/geolocation/blue_dot.png";
 
+	var _infoWindow = null;
+ 
+    function closeInfoWindow() {
+        _infoWindow.close();
+    }
+ 
+    function openInfoWindow(marker, content) {
+        _infoWindow.setContent(content);
+        _infoWindow.open(_map, marker);
+    }
+
+    function listenMarker (marker,content)
+	{
+	    google.maps.event.addListener(marker, 'click', function() {
+	        openInfoWindow(marker, content);
+	    });
+	}
+
 	var _onSuccess = function(position) {
 		_latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		var opt = {
@@ -26,41 +44,44 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 		};
 		
 		_map = new google.maps.Map(_container, opt);
+		_infoWindow = new google.maps.InfoWindow();
 		
 		if(_userPosition) {
-
-			var image = new google.maps.MarkerImage(
-			  _userPositionImg,
-			  new google.maps.Size(18,18),
-			  new google.maps.Point(0,0),
-			  new google.maps.Point(9,18)
-			);
-
-
-			var shape = {
-			  coord: [15,1,16,2,16,3,17,4,17,5,17,6,17,7,17,8,17,9,17,10,17,11,17,12,17,13,16,14,16,15,15,16,2,16,1,15,1,14,0,13,0,12,0,11,0,10,0,9,0,8,0,7,0,6,0,5,0,4,1,3,1,2,2,1,15,1],
-			  type: 'poly'
-			};
 
 			var marker = new google.maps.Marker({
 			position: _latlng,
 			map: _map,
 			title: 'Aquí estás tu',
-			icon:image, 
-			shape:shape
+			icon:_userPositionImg
 			});
 		}
 
 		if(_markers != false){
+			
+			var latLngList=[];
 			for(index in _markers){
 
 				var latLng = new google.maps.LatLng(_markers[index].lat,_markers[index].lng);
+				latLngList.push(latLng);
 				var marker = new google.maps.Marker({
 				position: latLng,
 				map: _map,
-				title: _markers[index].title
+				title: _markers[index].title,
+				icon: _markers[index].icon
 				});
+
+				listenMarker(marker, _markers[index].title);
+
 			}
+
+			if(_markers.length > 1){
+				var bounds = new google.maps.LatLngBounds();
+		        for (var i = 0, LtLgLen = latLngList.length; i < LtLgLen; i++) {
+		            bounds.extend(latLngList[i]);
+		        }
+
+	        	_map.fitBounds(bounds);
+        	}
 		}
 		
 	};

@@ -3,7 +3,7 @@ App.View = (function(lng, app, undefined) {
 	lng.View.Template.create(
 	        'stationsListView-tmp',
 	        '<li id="stationID-{{id_station}}" class="selectable">\
-				<div class="onright">{{updated}}</div>\
+				<div class="onright bubble blue">{{updated}}</div>\
 				<img src="assets/images/{{stationStatus}}" />\
 	        	{{stationName}}\
 				<small>Bikes: {{availablebikes}} | Slots: {{availableSlots}}</small>\
@@ -47,8 +47,20 @@ App.View = (function(lng, app, undefined) {
                 lng.dom('#availablebikes').html(data.availablebikes);
                 lng.dom('#availableSlots').html(data.availableSlots);
                 
+                var iconImg;
+
+				if(data.availablebikes == 0){
+					iconImg = "assets/images/enbiciPinRed.png";
+				}
+				else if(data.availablebikes > 0 && data.availablebikes < 3){
+					iconImg = "assets/images/enbiciPinYellow.png";
+				}
+				else{
+					iconImg = "assets/images/enbiciPin.png";
+				}
+
                 //Create the map
-                LUNGO.Sugar.Geolocation.setMap('stationDetailMap',true,[{lat:data.lat,lng:data.lng,title:data.stationName}]);     
+                LUNGO.Sugar.Geolocation.setMap('stationDetailMap',true,[{lat:data.lat,lng:data.lng,title:data.stationName,icon:iconImg}]);     
 
 				lng.Router.section('#stationDetail');
             }
