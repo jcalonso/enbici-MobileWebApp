@@ -14,9 +14,9 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 	var _map;
 	var _userPosition = false;
 	var _markers = false;
-	var _userPositionImg = "/lungo.js/sugars/geolocation/blue_dot.png";
-
+	var _userPositionImg = "lungo.js/sugars/geolocation/blue_dot.png";
 	var _infoWindow = null;
+	var _coords;
  
     function closeInfoWindow() {
         _infoWindow.close();
@@ -74,14 +74,22 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 
 			}
 
-			if(_markers.length > 1){
-				var bounds = new google.maps.LatLngBounds();
-		        for (var i = 0, LtLgLen = latLngList.length; i < LtLgLen; i++) {
-		            bounds.extend(latLngList[i]);
-		        }
+			var bounds = new google.maps.LatLngBounds();
 
-	        	_map.fitBounds(bounds);
-        	}
+			if(_userPosition){
+					console.error('dd');
+				bounds.extend(_latlng);}
+	        for (var i = 0, LtLgLen = latLngList.length; i < LtLgLen; i++) {
+	            bounds.extend(latLngList[i]);
+	            console.error('dd3');
+	        }
+	        _map.fitBounds(bounds);
+
+			var listener = google.maps.event.addListener(_map, "idle", function() { 
+			  _map.setZoom( _map.getZoom()- 1); 
+			  google.maps.event.removeListener(listener); 
+			});
+
 		}
 		
 	};
@@ -93,6 +101,10 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 			alert("No se puede conseguir localización");
 		}
 	};
+
+	var _userPos = function(position){
+		_userPosition = position.coords;
+	};
 	
 	var setMap = function(container, userPosition, markers) {
 		if(userPosition){_userPosition = true;}
@@ -100,9 +112,16 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 		_container = document.getElementById(container);
 		navigator.geolocation.getCurrentPosition(_onSuccess, _onError);
 	};
+
+	var getPos = function(callback){
+		navigator.geolocation.getCurrentPosition(function(userPos){
+			callback(userPos);
+		}, _onError);
+	};
 	
 	return {
-		setMap: setMap
+		setMap: setMap,
+		getPos: getPos
 	}
 
 })(LUNGO);

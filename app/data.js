@@ -26,7 +26,8 @@ App.Data = (function(lng, app, undefined) {
 				lng: "STRING",
 				stationName: "STRING",
 				stationStatus: "STRING",
-				updated: "STRING"
+				updated: "STRING",
+                distance: "FLOAT"
     		}
     	},
         {

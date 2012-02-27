@@ -3,10 +3,10 @@ App.View = (function(lng, app, undefined) {
 	lng.View.Template.create(
 	        'stationsListView-tmp',
 	        '<li id="stationID-{{id_station}}" class="selectable">\
-				<div class="onright bubble blue">{{updated}}</div>\
+				<div class="onright bubble blue">{{distance}} kms</div>\
 				<img src="assets/images/{{stationStatus}}" />\
 	        	{{stationName}}\
-				<small>Bikes: {{availablebikes}} | Slots: {{availableSlots}}</small>\
+				<small><span class="icon upload mini"></span> Bikes: {{availablebikes}} | <span class="icon download mini cellSubtitle"></span> Slots: {{availableSlots}}</small>\
 	        </li>'
 	    );
 	
@@ -46,6 +46,7 @@ App.View = (function(lng, app, undefined) {
                 lng.dom('#stationName').html(data.stationName);
                 lng.dom('#availablebikes').html(data.availablebikes);
                 lng.dom('#availableSlots').html(data.availableSlots);
+                lng.dom('#stationDistance').html(data.distance+" kms");
                 
                 var iconImg;
 

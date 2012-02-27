@@ -37,3 +37,40 @@
 	color:#FFF !important;
 	opacity: 0.8 !important;
 }
+
+.centerTitle{
+	text-align: center;
+}
+
+.cellSubtitle{
+	float: none !important;
+}
+
+.infoWindow{
+	margin-top:8px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#2C2C2D;
+
+}
+
+.infoWindow .title {
+background-color: #2C2C2D !important;
+color: white !important;
+text-shadow: 0px 1px 0px black !important;
+height:35px;
+padding-left: 5px;
+padding-top: 5px;
+word-wrap: break-word;
+}
+
+.infoWindow .infoWindowLink{
+	height:25px;
+	text-align: center;
+	padding-top: 5px;
+	text-decoration: underline;
+}
+
+.infoWindow .infoWindowsStationData{
+	padding-left:5px;
+}

@@ -41,7 +41,7 @@
 				<a id="btnRefresh" href="#" data-target="#" data-icon="refresh"></a>
 				<a id="btnProviders" href="#preferencesView" data-target="section" data-icon="settings"><abbr>Providers</abbr></a>
 			</nav>
-			<div class="center"><img src="assets/images/titleLogo.png"></div>
+			<div class="centerTitle"><img width="175" height="27" src="assets/images/titleLogo@2x.png"></div>
         </header>
 
         <article id="enbici-listView" class="list" >
@@ -59,7 +59,7 @@
 
         <footer class="toolbar">
 		<nav>
-        	<a href="#enbici-listView" data-target="article"><img src="assets/images/47-bicycle.png" alt="enbici icon"/></a>
+        	<a href="#enbici-listView" data-target="article"><img width="41" height="41" src="assets/images/enbiciLogo_Grey@2x.png" alt="enbici icon"/></a>
 			<a href="#enbici-favourites" id="btnShowFavs" data-target="article" data-icon="star" ></a>
 			<a href="#enbici-about" data-target="article" data-icon="info" ></a>
         </nav>
@@ -82,9 +82,11 @@
         
         <article id='stationDetailWrap' class="list">
             <div class="indented">
+
                 <ul>
                     <input type="hidden" id="stationDetailID" value="0" />
                     <li class="tip darker" data-icon="info">
+                        <span id="stationDistance" class="onright bubble blue">0 kms</span>
                         <small>Station name</small>
                         <span id='stationName'></span>
                     </li>
