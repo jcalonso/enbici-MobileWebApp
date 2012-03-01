@@ -3,7 +3,7 @@ App.View = (function(lng, app, undefined) {
 	lng.View.Template.create(
 	        'stationsListView-tmp',
 	        '<li id="stationID-{{id_station}}" class="selectable">\
-				<div class="onright bubble blue">{{distance}} kms</div>\
+				<span class="onright bubble blue">{{distance}} kms</span>\
 				<img src="assets/images/{{stationStatus}}" />\
 	        	{{stationName}}\
 				<small><span class="icon upload mini"></span> Bikes: {{availablebikes}} | <span class="icon download mini cellSubtitle"></span> Slots: {{availableSlots}}</small>\
@@ -13,6 +13,7 @@ App.View = (function(lng, app, undefined) {
 	lng.View.Template.create(
 	        'providersListView-tmp',
 	        '<li id="providerID-{{id_service}}" class="selectable" data-icon="info">\
+	        	<span class="onright bubble blue">{{distance}} kms</span>\
 	        	<p style="display:none" class="icon check onright"></p>\
 	        	<span class="icon {{geoLocStations}}"></span>\
 	        	{{location}}\

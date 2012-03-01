@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./lungo.js/lungo.theme.default.css">
     <link rel="stylesheet" href="./assets/stylesheets/enbici.theme.css">
     <link rel="stylesheet" href="./lungo.js/sugars/Growl/lungo.sugar.growl.css">
+    <link rel="stylesheet" href="assets/stylesheets/add2home.css">
 
 </head>
 
@@ -61,7 +62,7 @@
 		<nav>
         	<a href="#enbici-listView" data-target="article"><img width="41" height="41" src="assets/images/enbiciLogo_Grey@2x.png" alt="enbici icon"/></a>
 			<a href="#enbici-favourites" id="btnShowFavs" data-target="article" data-icon="star" ></a>
-			<a href="#enbici-about" data-target="article" data-icon="info" ></a>
+			<a href="#enbici-about" data-target="section" data-icon="info" ></a>
         </nav>
 		</footer>
     </section>
@@ -107,15 +108,43 @@
 
         <!-- ============================= enbici - Preferences ============================= -->
     <section id="preferencesView">
-         <header data-back="left" data-title="Providers"></header>
+         <header id="blasss" data-back="left" data-title="Providers"></header>
 
-            <div class="center"><img src="assets/images/titleLogo.png"></div>
-        </header>
 
         <article id="enbici-providersView" class="list scrollable"></article>
 
 
-    </section>    
+    </section>  
+
+        <!-- ============================= enbici - Preferences ============================= -->
+    <section id="enbici-about">
+         <header data-back="left" data-title="About"></header>
+
+
+        <article id="enbici-aboutView" class="list">
+            <div class="centerTitle"><img width="300" height="64" src="assets/images/enBiciLogoBig@2x.png"></div>
+            <div class="indented">
+            <ul>
+                <li data-icon="target mini">
+                    Version<span class="onright">2.0.5</span>
+                </li>
+                <li id="optShare" data-icon="chat mini">
+                    Share <span class="onright" id="shareBtn" ><a class="icon right mini "></a></span>
+                </li>
+                <li data-icon="mail mini">
+                    Contact Us <span class="onright"><a href="mailto:contacto@trifase.net">contacto@trifase.net</a></span>
+                </li>
+                <li data-icon="star mini">
+                    Twitter<span class="onright"><a href="http://twitter.com/trifase_net">@Trifase_net</a></span>
+                </li>
+                <li data-icon="info mini">
+                    enbici Website<span class="onright"><a href="http://enbicitrifase.net">http://enbici.trifase.net</a></span>
+                </li>
+            </ul>
+            <div class="centerTitle"><img width="175" height="43" src="assets/images/trifaseLogo@2x.png"></div>
+        </div>
+        </article>
+    </section>  
 
 
 	<!-- LungoJS (Production mode) -->
@@ -130,6 +159,9 @@
     <script src="app/events.js"></script>
     <script src="app/services.js"></script>
     <script src="app/view.js"></script>
+    <!-- Third party -->
+    <script src="assets/javascripts/add2home.js"></script>
+
 </body>
 </html>
 

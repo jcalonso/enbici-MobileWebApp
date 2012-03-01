@@ -7,12 +7,13 @@ App.Data = (function(lng, app, undefined) {
     		name:'providers',
     		drop:false,
     		fields:{
-    			geoLocStations: "INT",
+    			geoLocStations: "STRING",
 				id_service: "INT",
 				lat: "STRING",
 				lng: "STRING",
 				location: "STRING",
-				serviceName: "STRING"
+				serviceName: "STRING",
+                distance: "STRING"
     		}
     	},
     	{
@@ -27,7 +28,7 @@ App.Data = (function(lng, app, undefined) {
 				stationName: "STRING",
 				stationStatus: "STRING",
 				updated: "STRING",
-                distance: "FLOAT"
+                distance: "STRING"
     		}
     	},
         {

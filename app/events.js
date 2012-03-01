@@ -1,25 +1,56 @@
 App.Events = (function(lng, app, undefined) {
 
     LUNGO.dom(document).ready(function(){
-            //show(title, description, icon, animate, seconds, callback)
-            LUNGO.Sugar.Growl.show('Loading!', 'Loading station status, please wait', 'loading', true, 2, function() {
-                //alert('Loaded');
-                LUNGO.Sugar.Growl.hide();
-            });
+        loadStationsStatus();
+            
+    });//documentReady
 
+    //Show loading, check preferences, show status
+    var loadStationsStatus = function(){
+    	LUNGO.Sugar.Growl.show('Loading!', 'Loading station status, please wait', 'loading', true, 1, function() {
             lng.Data.Sql.select('preferences',null,function(result){
 				if(result.length > 0){
-					LUNGO.Sugar.Geolocation.getPos(function(userPos){
-
-						App.Services.obtStationsStatus(result[0].id_service,userPos.coords.latitude,userPos.coords.longitude);
+					lng.Data.Sql.select('providers',{id_service:result[0].id_service,geoLocStations:'pushpin'},function(result2){
+						if(result2.length > 0){
+							//Geolocated stations
+							LUNGO.Sugar.Geolocation.getPos(function(userPos){
+								lng.dom('#btnShowMapView').show(); //Map view button for the user 
+								lng.dom('#stationDetailMap').show();
+								App.Services.obtStationsStatus(result[0].id_service,userPos.coords.latitude,userPos.coords.longitude);
+								LUNGO.Sugar.Growl.hide();
+							});
+						}
+						else
+						{
+							//No geolocated
+							lng.dom('#btnShowMapView').hide(); //No map view button for the user
+							lng.dom('#stationDetailMap').hide();
+							App.Services.obtStationsStatus(result[0].id_service,false,false);
+							LUNGO.Sugar.Growl.hide();
+						}
 					});
 					
 				}
 				else{
 					//Show notification
+					var options = [
+			            {
+			                name: 'Select provider',
+			                color: 'blue',
+			                icon:'settings',
+			                callback: function(){
+			                			App.Services.obtProviders();
+			                			LUNGO.Sugar.Growl.hide();
+			                			lng.Router.section('preferencesView');
+					       		 	}
+			            }
+		        	];
+			       LUNGO.Sugar.Growl.option('Before you start, select your bicycle service provider', options);
 				}
-			});
-        });
+			});//Select user preferences 
+        });//Growl loading
+
+    };
 
     //Load Stations status
 	lng.dom('#btnRefresh').tap(function(event) {
@@ -33,10 +64,9 @@ App.Events = (function(lng, app, undefined) {
 			}
 			else{
 				//Show notification
+				//This shoulnt happen
+				alert('something went wrong :(');
 			}
-
-			
-
 		});
         
     });
@@ -56,6 +86,12 @@ App.Events = (function(lng, app, undefined) {
         
     });
 
+    //btn data-back preferences
+    lng.dom('section#preferencesView [data-back]').tap(function(event){
+
+    	loadStationsStatus();
+    });
+
 	//Load listview
 	lng.dom("#btnListMapView").tap(function(event){
 		lng.dom("#btnShowMapView").show();
@@ -65,7 +101,6 @@ App.Events = (function(lng, app, undefined) {
 
 	//Load Map
 	lng.dom("#btnShowMapView").tap(function(event){
-		
 		lng.dom("#btnShowMapView").hide();
 		lng.dom("#btnListMapView").show();
 
@@ -123,6 +158,11 @@ App.Events = (function(lng, app, undefined) {
 
 	});
 
+	lng.dom("article#enbici-favourites li").swipeLeft(function(event){
+			alert('Deleted');
+	});
+
+
 	//Provider selected
 	lng.dom("article#enbici-providersView li").tap(function(event){
 		
@@ -170,7 +210,50 @@ App.Events = (function(lng, app, undefined) {
 
 	});
 
-    
+	//Share button
+	lng.dom('#optShare').tap(function(event){
+		var options = [
+            {
+                name: 'Twitter',
+                icon: 'star',
+                color: 'twitter',
+                callback: function(){
+                			//Something
+                			window.location.href = "http://twitter.com/intent/tweet?text=enbici te permite obtener la disponibilidad de las estaciones de bicicletas públicas en España más cercanas a tí. http://bit.ly/enbiciApp";
+
+		       		 	}
+            },
+            {
+                name: 'Facebook',
+                icon: 'star',
+                color: 'facebook',
+                callback: function(){
+                			//Something
+                			window.location.href = "http://m.facebook.com/sharer.php?u=enbici te permite obtener la disponibilidad de las estaciones de bicicletas públicas en España más cercanas a tí. http://bit.ly/enbiciApp";
+		       		 	}
+            },
+            {
+                name: 'Email',
+                icon: 'mail',
+                color: 'default',
+                callback: function(){
+                			//Something
+                			window.location = "mailto:?subject=enbici, disponibilidad de bicicletas publicas de España&body=enbici te permite obtener la disponibilidad de las estaciones de bicicletas públicas en España más cercanas a tí. http://bit.ly/enbiciApp"
+		       		 	}
+            },
+            {
+                name: 'Cancel',
+                icon: 'close',
+                color: 'red',
+                callback: function() {
+                    lng.Sugar.Growl.hide();
+                }
+            }
+        ];
+
+        lng.Sugar.Growl.option('Options', options);
+	});
+  
 
 	return {
 
