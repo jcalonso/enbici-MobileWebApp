@@ -48,12 +48,13 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 		
 		if(_userPosition) {
 
+			var _image = new google.maps.MarkerImage(_userPositionImg, null, null, null, new google.maps.Size(18,18));
 
 			var marker = new google.maps.Marker({
 			position: _latlng,
 			map: _map,
 			title: 'Aquí estás tu',
-			icon:_userPositionImg
+			icon:_image
 			});
 		}
 
