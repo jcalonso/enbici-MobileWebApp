@@ -14,7 +14,7 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 	var _map;
 	var _userPosition = false;
 	var _markers = false;
-	var _userPositionImg = "lungo.js/sugars/geolocation/blue_dot.png";
+	var _userPositionImg = "lungo.js/sugars/geolocation/bluedot@x2.png";
 	var _infoWindow = null;
 	var _coords;
  
