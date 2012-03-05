@@ -1,6 +1,6 @@
 App.Services = (function(lng, app, undefined) {
 
-var enbiciApi = "http://192.168.1.12/";
+var enbiciApi = "http://163.117.154.114/";
 //var enbiciApi = "http://enbici.trifase.net/api/";
 
 var obtStationsStatus = function(id_service,lat, longitude) {

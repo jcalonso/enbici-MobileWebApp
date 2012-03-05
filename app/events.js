@@ -112,13 +112,13 @@ App.Events = (function(lng, app, undefined) {
 				var iconImg;
 
 				if(result[index].availablebikes == 0){
-					iconImg = "assets/images/enbiciPinRed.png";
+					iconImg = "assets/images/enbiciPinRed@2x.png";
 				}
 				else if(result[index].availablebikes > 0 && result[index].availablebikes < 3){
-					iconImg = "assets/images/enbiciPinYellow.png";
+					iconImg = "assets/images/enbiciPinYellow@2x.png";
 				}
 				else{
-					iconImg = "assets/images/enbiciPin.png";
+					iconImg = "assets/images/enbiciPin@2x.png";
 				}
 
 				var newMarker = {

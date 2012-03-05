@@ -48,6 +48,7 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 		
 		if(_userPosition) {
 
+
 			var marker = new google.maps.Marker({
 			position: _latlng,
 			map: _map,
@@ -61,13 +62,15 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 			var latLngList=[];
 			for(index in _markers){
 
+				var _image = new google.maps.MarkerImage(_markers[index].icon, null, null, null, new google.maps.Size(30,30));
+
 				var latLng = new google.maps.LatLng(_markers[index].lat,_markers[index].lng);
 				latLngList.push(latLng);
 				var marker = new google.maps.Marker({
 				position: latLng,
 				map: _map,
 				title: _markers[index].title,
-				icon: _markers[index].icon
+				icon: _image
 				});
 
 				listenMarker(marker, _markers[index].title);
