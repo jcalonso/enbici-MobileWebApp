@@ -65,10 +65,16 @@ word-wrap: break-word;
 }
 
 .infoWindow .infoWindowLink{
-	height:25px;
+	height:16px;
 	text-align: center;
 	padding-top: 5px;
 	text-decoration: underline;
+}
+
+.infoWindow .infoWindowLink a{
+	color:#3366CC;
+
+
 }
 
 .infoWindow .infoWindowsStationData{

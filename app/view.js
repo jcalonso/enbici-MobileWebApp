@@ -52,13 +52,13 @@ App.View = (function(lng, app, undefined) {
                 var iconImg;
 
 				if(data.availablebikes == 0){
-					iconImg = "assets/images/enbiciPinRed.png";
+					iconImg = "assets/images/enbiciPinRed@2x.png";
 				}
 				else if(data.availablebikes > 0 && data.availablebikes < 3){
-					iconImg = "assets/images/enbiciPinYellow.png";
+					iconImg = "assets/images/enbiciPinYellow@2x.png";
 				}
 				else{
-					iconImg = "assets/images/enbiciPin.png";
+					iconImg = "assets/images/enbiciPin@2x.png";
 				}
 
                 //Create the map

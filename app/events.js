@@ -130,7 +130,7 @@ App.Events = (function(lng, app, undefined) {
 				var newMarker = {
 					lat:result[index].lat,
 					lng:result[index].lng,
-					title:'<div class="infoWindow"><span class="onright bubble blue">'+result[index].distance+' kms</span><p class="title"><span class="icon info"></span><span>'+result[index].stationName+'</span></p><p class="infoWindowsStationData"><small> <span class="icon upload mini"></span> Bikes: '+result[index].availablebikes+' | <span class="icon download mini cellSubtitle"></span> Slots: '+result[index].availableSlots+'</small></p><p class="infoWindowLink lightgreen"><a href="#" onclick="App.View.stationDetail('+result[index].id_station+');"></span>Station details <span class="icon right"></a></p></div>',
+					title:'<div class="infoWindow"><span class="onright bubble blue">'+result[index].distance+' kms</span><p class="title"><span class="icon info"></span><span>'+result[index].stationName+'</span></p><p class="infoWindowsStationData"><small> <span class="icon upload mini"></span> Bikes: '+result[index].availablebikes+' | <span class="icon download mini cellSubtitle"></span> Slots: '+result[index].availableSlots+'</small></p><p class="infoWindowLink"><a href="#" onclick="App.View.stationDetail('+result[index].id_station+');"></span>Station details <span class="icon right"></a></p></div>',
 					icon:iconImg
 				};
 				markers.push(newMarker);
