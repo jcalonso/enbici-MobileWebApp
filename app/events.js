@@ -70,6 +70,12 @@ App.Events = (function(lng, app, undefined) {
 		});
         
     });
+
+    //Refresh the providers cache
+    lng.dom('#btnRefreshProviders').tap(function(event){
+    	App.Services.obtProviders();
+    	
+    });
 	
 	//Load service providers
 	lng.dom('#btnProviders').tap(function(event) {

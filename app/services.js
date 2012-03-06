@@ -1,7 +1,7 @@
 App.Services = (function(lng, app, undefined) {
 
-var enbiciApi = "http://192.168.1.12/";
-//var enbiciApi = "http://enbici.trifase.net/api/";
+//var enbiciApi = "http://192.168.1.12/";
+var enbiciApi = "http://enbici.trifase.net/api/";
 
 var obtStationsStatus = function(id_service,lat, longitude) {
 	
@@ -10,7 +10,7 @@ var obtStationsStatus = function(id_service,lat, longitude) {
 		longitude = "";
 	}
 
-	$$.get(enbiciApi+'StationsStatus.json',
+	$$.get(enbiciApi,
 		{
 			'function':'stations',
 			id_service:id_service,
@@ -33,7 +33,8 @@ var obtStationsStatus = function(id_service,lat, longitude) {
 			    	stations[index].distance = Math.round(stations[index].distance*100)/100
 			    }
 			}
-			
+			//Clean Database
+			lng.Data.Sql.drop('stationsStatus');
 			App.Data.cacheStationsStatus(response.Stations);
 			lng.View.Template.binding('enbici-listView-data', 'stationsListView-tmp', stations);
 			lng.View.Scroll.create('enbici-listView');
@@ -45,7 +46,7 @@ var obtStationsStatus = function(id_service,lat, longitude) {
 
 var obtProviders = function() {
 	LUNGO.Sugar.Geolocation.getPos(function(userPos){
-		$$.get(enbiciApi+'Providers.json',
+		$$.get(enbiciApi,
 			{
 				'function':'hiringServices',
 				'lat':userPos.coords.latitude,
@@ -58,9 +59,9 @@ var obtProviders = function() {
 				    //Check if the stations are geolocated if is  1-> On or 0 -> Off"
 				    providersList[index].geoLocStations = (providersList[index].geoLocStations == 1) ? 'pushpin' : 'warning';
 				    providersList[index].distance = Math.round(providersList[index].distance*100)/100;
-				    console.error(providersList[index].distance );
 				}
-
+				//Clean Database
+				lng.Data.Sql.drop('providers');
 				App.Data.cacheProviders(providersList);
 				App.View.providers(providersList);
 				lng.Data.Sql.select('preferences',null,function(result){

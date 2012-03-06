@@ -13,7 +13,7 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 	var _latlng;
 	var _map;
 	var _userPosition = false;
-	var _markers = false;
+	var _markers = [];
 	var _userPositionImg = "lungo.js/sugars/geolocation/bluedot@x2.png";
 	var _infoWindow = null;
 	var _coords;
@@ -73,7 +73,6 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 				title: _markers[index].title,
 				icon: _image
 				});
-
 				listenMarker(marker, _markers[index].title);
 
 			}
@@ -81,11 +80,9 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 			var bounds = new google.maps.LatLngBounds();
 
 			if(_userPosition){
-					console.error('dd');
 				bounds.extend(_latlng);}
 	        for (var i = 0, LtLgLen = latLngList.length; i < LtLgLen; i++) {
 	            bounds.extend(latLngList[i]);
-	            console.error('dd3');
 	        }
 	        _map.fitBounds(bounds);
 
