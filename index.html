@@ -40,7 +40,7 @@
 					
 			<nav class="onright">
 				<a id="btnRefresh" href="#" data-target="#" data-icon="refresh"></a>
-				<a id="btnProviders" href="#preferencesView" data-target="section" data-icon="settings"><abbr>Providers</abbr></a>
+				<a id="btnProviders" href="#preferencesView" data-target="section" data-icon="settings"><abbr>Proveedores</abbr></a>
 			</nav>
 			<div class="centerTitle"><img alt="enbici logo" width="175" height="27" src="assets/images/titleLogo@2x.png" /></div>
         </header>
@@ -69,8 +69,10 @@
         <!-- ============================= enbici - stationDetail ============================= -->
 
     <section id="stationDetail">
-         <header data-title="Station detail">
-             <a href="#back" data-target="section" class="button" data-icon="home"></a>       
+         <header data-title="Detalle de estaci&oacute;n">
+             <nav class="onleft">
+                <a href="#back" data-target="section" data-icon="home"></a>       
+            </nav>        
 
 
 
@@ -87,15 +89,15 @@
                     
                     <li class="tip darker" data-icon="info">
                         <span id="stationDistance" class="onright bubble blue">0 kms</span>
-                        <small>Station name</small>
+                        <small>Nombre de la estaci&oacute;n</small>
                         <span id='stationName'></span>
                     </li>
-                    <li class="anchor">Availability information</li>
+                    <li class="anchor">Informaci&oacute;n de disponibilidad</li>
                     <li data-icon="upload">
-                        <span class='detailSubtitles' id='availablebikes'></span> Available bikes
+                        <span class='detailSubtitles' id='availablebikes'></span> Bicis disponibles
                     </li>
                     <li data-icon="download">
-                        <span class='detailSubtitles' id='availableSlots'></span> Available Locks
+                        <span class='detailSubtitles' id='availableSlots'></span> Candados disponibles
                     </li>
                 </ul>
             </div>        
@@ -107,7 +109,10 @@
 
         <!-- ============================= enbici - Preferences ============================= -->
     <section id="preferencesView">
-        <header data-back="left" data-title="Providers">
+        <header  data-title="Proveedores">
+             <nav class="onleft">
+                <a href="#back" data-target="section" data-icon="left"></a>       
+            </nav> 
             <nav class="onright">
                 <a id="btnRefreshProviders" href="#" data-target="#" data-icon="refresh clear"></a>
             </nav>
@@ -121,7 +126,11 @@
 
         <!-- ============================= enbici - About ============================= -->
     <section id="enbici-about">
-         <header data-back="left" data-title="About"></header>
+         <header data-title="Acerca">
+            <nav class="onleft">
+                <a href="#back" data-target="section" data-icon="left"></a>       
+            </nav> 
+         </header>
 
 
         <article id="enbici-aboutView" class="list">
@@ -129,19 +138,19 @@
             <div class="indented">
             <ul>
                 <li data-icon="target mini">
-                    Version<span class="onright">2.0.5</span>
+                    Versi&oacute;n<span class="onright">1.0 (0315)</span>
                 </li>
                 <li id="optShare" data-icon="chat mini">
-                    Share <span class="onright" id="shareBtn" ><a class="icon right mini "></a></span>
+                    Compartir <span class="onright" id="shareBtn" ><a class="icon right mini "></a></span>
                 </li>
                 <li data-icon="mail mini">
-                    Contact Us <span class="onright"><a href="mailto:contacto@trifase.net">contacto@trifase.net</a></span>
+                    Cont&aacute;ctanos <span class="onright"><a href="mailto:contacto@trifase.net">contacto@trifase.net</a></span>
                 </li>
                 <li data-icon="star mini">
                     Twitter<span class="onright"><a href="http://twitter.com/trifase_net">@Trifase_net</a></span>
                 </li>
                 <li data-icon="info mini">
-                    enbici Website<span class="onright"><a href="http://enbicitrifase.net">http://enbici.trifase.net</a></span>
+                    Sitio web de enbici<span class="onright"><a href="http://enbici.trifase.net">http://enbici.trifase.net</a></span>
                 </li>
             </ul>
             <div class="centerTitle"><img alt="trifase logo" width="175" height="43" src="assets/images/trifaseLogo@2x.png" /></div>
@@ -156,6 +165,8 @@
 	<script src="http://maps.google.com/maps/api/js?sensor=false&&amp;v=3.6"></script>
 	<script src="lungo.js/sugars/geolocation/lungo.sugar.geolocation.js"></script>
     <script src="lungo.js/sugars/Growl/lungo.sugar.growl.js"></script>
+    <script src="assets/javascripts/i18n.js"></script>
+    <script src="lungo.js/sugars/Language/lungo.sugar.language.js"></script>
     <!-- LungoJS - Sandbox App -->
     <script src="app/app.js"></script>
     <script src="app/data.js"></script>

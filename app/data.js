@@ -13,7 +13,8 @@ App.Data = (function(lng, app, undefined) {
 				lng: "STRING",
 				location: "STRING",
 				serviceName: "STRING",
-                distance: "STRING"
+                distance: "STRING",
+
     		}
     	},
     	{

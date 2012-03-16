@@ -4,8 +4,15 @@ var App = (function(lng, undefined) {
     
     lng.App.init({
         name: 'enbici',
-        version: '2.0'
+        version: '1.0 (0315)',
+        language : navigator.language
     });
+
+    lng.Sugar.Language.create('es',es);
+	lng.Sugar.Language.create('en',en);
+
+	//var lang = lng.App.get('language').split("-");
+	lng.Sugar.Language.get('es');
     
 
     return {

@@ -6,7 +6,7 @@ App.View = (function(lng, app, undefined) {
 				<span class="onright bubble blue">{{distance}} kms</span>\
 				<img src="assets/images/{{stationStatus}}" />\
 	        	{{stationName}}\
-				<small><span class="icon upload mini"></span> Bikes: {{availablebikes}} | <span class="icon download mini cellSubtitle"></span> Slots: {{availableSlots}}</small>\
+				<small><span class="icon upload mini"></span> Bicis: {{availablebikes}} | <span class="icon download mini cellSubtitle"></span> Candados: {{availableSlots}}</small>\
 	        </li>'
 	    );
 	

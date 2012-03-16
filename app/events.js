@@ -7,18 +7,14 @@ App.Events = (function(lng, app, undefined) {
 
     //Show loading, check preferences, show status
     var loadStationsStatus = function(){
-    	LUNGO.Sugar.Growl.show('Loading!', 'Loading station status, please wait', 'loading', true, 1, function() {
+    	LUNGO.Sugar.Growl.show(lng.Sugar.Language.label('loading'), lng.Sugar.Language.label('loading_stations_pleasewait'), 'loading', true, 1, function() {
             lng.Data.Sql.select('preferences',null,function(result){
 				if(result.length > 0){
 					lng.Data.Sql.select('providers',{id_service:result[0].id_service,geoLocStations:'pushpin'},function(result2){
 						if(result2.length > 0){
 							//Geolocated stations
-							LUNGO.Sugar.Geolocation.getPos(function(userPos){
-								lng.dom('#btnShowMapView').show(); //Map view button for the user 
-								lng.dom('#stationDetailMap').show();
-								App.Services.obtStationsStatus(result[0].id_service,userPos.coords.latitude,userPos.coords.longitude);
-								LUNGO.Sugar.Growl.hide();
-							});
+							App.Services.obtStationsStatus(result[0].id_service);
+							LUNGO.Sugar.Growl.hide();
 						}
 						else
 						{
@@ -35,7 +31,7 @@ App.Events = (function(lng, app, undefined) {
 					//Show notification
 					var options = [
 			            {
-			                name: 'Select provider',
+			                name: lng.Sugar.Language.label('before_start_select'),
 			                color: 'blue',
 			                icon:'settings',
 			                callback: function(){
@@ -45,7 +41,7 @@ App.Events = (function(lng, app, undefined) {
 					       		 	}
 			            }
 		        	];
-			       LUNGO.Sugar.Growl.option('Before you start, select your bicycle service provider', options);
+			       LUNGO.Sugar.Growl.option(lng.Sugar.Language.label('before_start'), options);
 				}
 			});//Select user preferences 
         });//Growl loading
@@ -57,10 +53,7 @@ App.Events = (function(lng, app, undefined) {
 		lng.Data.Sql.select('preferences',null,function(result){
 			
 			if(result.length > 0){
-				LUNGO.Sugar.Geolocation.getPos(function(userPos){
-
-						App.Services.obtStationsStatus(result[0].id_service,userPos.coords.latitude,userPos.coords.longitude);
-					});
+				App.Services.obtStationsStatus(result[0].id_service);
 			}
 			else{
 				//Show notification
@@ -79,21 +72,24 @@ App.Events = (function(lng, app, undefined) {
 	
 	//Load service providers
 	lng.dom('#btnProviders').tap(function(event) {
-        //lng.Router.section('enbiciApp');
+        LUNGO.Sugar.Growl.show(lng.Sugar.Language.label('loading'), lng.Sugar.Language.label('loading_stations_pleasewait'), 'loading', true, 1, function() {
         lng.Data.Sql.select('providers',null,function(result){
 
         	if(result.length >0){
         		App.View.providers(result);
+        		LUNGO.Sugar.Growl.hide();
         	}
         	else{
         		App.Services.obtProviders();
+        		LUNGO.Sugar.Growl.hide();
         	}
         });
+    });//Growl
         
     });
 
     //btn data-back preferences
-    lng.dom('section#preferencesView [data-back]').tap(function(event){
+    lng.dom('section#preferencesView [href="#back"]').tap(function(event){
 
     	loadStationsStatus();
     });
@@ -130,14 +126,22 @@ App.Events = (function(lng, app, undefined) {
 				var newMarker = {
 					lat:result[index].lat,
 					lng:result[index].lng,
-					title:'<div class="infoWindow"><span class="onright bubble blue">'+result[index].distance+' kms</span><p class="title"><span class="icon info"></span><span>'+result[index].stationName+'</span></p><p class="infoWindowsStationData"><small> <span class="icon upload mini"></span> Bikes: '+result[index].availablebikes+' | <span class="icon download mini cellSubtitle"></span> Slots: '+result[index].availableSlots+'</small></p><p class="infoWindowLink"><a href="#" onclick="App.View.stationDetail('+result[index].id_station+');"></span>Station details <span class="icon right"></a></p></div>',
+					title:'<div class="infoWindow"><span class="onright bubble blue">'+result[index].distance+' kms</span><p class="title"><span class="icon info"></span><span>'+result[index].stationName+'</span></p><p class="infoWindowsStationData"><small> <span class="icon upload mini"></span> Bicis: '+result[index].availablebikes+' | <span class="icon download mini cellSubtitle"></span> Candados: '+result[index].availableSlots+'</small></p><p class="infoWindowLink"><a href="#" onclick="App.View.stationDetail('+result[index].id_station+');"></span>'+lng.Sugar.Language.label('station_details')+'<span class="icon right"></a></p></div>',
 					icon:iconImg
 				};
 				markers.push(newMarker);
 			}
 
+			LUNGO.Sugar.Geolocation.getPos(function(userPos){
+				if(userPos.code){
+					
+					LUNGO.Sugar.Geolocation.setMap('enbici-mapView',false,markers);
+				}
+				else{
+					LUNGO.Sugar.Geolocation.setMap('enbici-mapView',true,markers);
+				}
+			});
 			
-			LUNGO.Sugar.Geolocation.setMap('enbici-mapView',true,markers);
 		});
         
 	});
@@ -188,18 +192,18 @@ App.Events = (function(lng, app, undefined) {
 
 		var options = [
             {
-                name: 'Add to favourites!',
+                name: lng.Sugar.Language.label('add_favorite'),
                 icon: 'star',
                 color: 'yellow',
                 callback: function(){
                 			var id_station = lng.dom("#stationDetailID").attr("value");
          			     	App.Data.addFavoriteStation(id_station);
-         			     	lng.Sugar.Growl.show('Favorite added', 'Favorite added', 'check', true, 1);
+         			     	lng.Sugar.Growl.show(lng.Sugar.Language.label('favorite_added'), lng.Sugar.Language.label('favorite_added'), 'check', true, 1);
 
 		       		 	}
             },
             {
-                name: 'Cancel',
+                name: lng.Sugar.Language.label('cancel'),
                 icon: 'close',
                 color: 'red',
                 callback: function() {
@@ -207,7 +211,7 @@ App.Events = (function(lng, app, undefined) {
                 }
             }
         ];
-        lng.Sugar.Growl.option('Options', options);
+        lng.Sugar.Growl.option(lng.Sugar.Language.label('options'), options);
 	});
 
 	//Show user favorites
@@ -225,7 +229,7 @@ App.Events = (function(lng, app, undefined) {
                 color: 'twitter',
                 callback: function(){
                 			//Something
-                			window.location.href = "http://twitter.com/intent/tweet?text=enbici te permite obtener la disponibilidad de las estaciones de bicicletas públicas en España más cercanas a tí. http://bit.ly/enbiciApp";
+                			window.location.href = "http://twitter.com/intent/tweet?text="+lng.Sugar.Language.label('twitter')+" http://goo.gl/4wqPK";
 
 		       		 	}
             },
@@ -235,7 +239,7 @@ App.Events = (function(lng, app, undefined) {
                 color: 'facebook',
                 callback: function(){
                 			//Something
-                			window.location.href = "http://m.facebook.com/sharer.php?u=enbici te permite obtener la disponibilidad de las estaciones de bicicletas públicas en España más cercanas a tí. http://bit.ly/enbiciApp";
+                			window.location.href = "http://m.facebook.com/sharer.php?u="+lng.Sugar.Language.label('facebook')+" http://goo.gl/4wqPK";
 		       		 	}
             },
             {
@@ -244,11 +248,11 @@ App.Events = (function(lng, app, undefined) {
                 color: 'default',
                 callback: function(){
                 			//Something
-                			window.location = "mailto:?subject=enbici, disponibilidad de bicicletas publicas de España&body=enbici te permite obtener la disponibilidad de las estaciones de bicicletas públicas en España más cercanas a tí. http://bit.ly/enbiciApp"
+                			window.location = "mailto:?subject="+lng.Sugar.Language.label('share_mail_subject')+"&body="+lng.Sugar.Language.label('share_mail_body')+" http://goo.gl/4wqPK"
 		       		 	}
             },
             {
-                name: 'Cancel',
+                name: lng.Sugar.Language.label('cancel'),
                 icon: 'close',
                 color: 'red',
                 callback: function() {
@@ -257,7 +261,7 @@ App.Events = (function(lng, app, undefined) {
             }
         ];
 
-        lng.Sugar.Growl.option('Options', options);
+        lng.Sugar.Growl.option(lng.Sugar.Language.label('options'), options);
 	});
   
 

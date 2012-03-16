@@ -4,7 +4,7 @@
  * @namespace LUNGO.Sugar
  * @class Geolocation
  *
- * @author Gabriel Ferreiro Blazetic <gbril9119@gmail.com> || @garolard
+ * @author Juan Carlos Alonso @l_h2o_l | Gabriel Ferreiro Blazetic <gbril9119@gmail.com> || @garolard
  */
 
 LUNGO.Sugar.Geolocation = (function(lng, undefined) {
@@ -17,6 +17,7 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 	var _userPositionImg = "lungo.js/sugars/geolocation/bluedot@x2.png";
 	var _infoWindow = null;
 	var _coords;
+	var _defaulPosition = {'coords':{'latitude':40.3294542,'longitude':-3.7705924}};
  
     function closeInfoWindow() {
         _infoWindow.close();
@@ -97,10 +98,14 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 	
 	var _onError = function(err) {
 		if(err.code == 1) {
-			alert("Acceso denegado");
+			console.log("Acceso denegado");
 		} else if(err.code == 2) {
-			alert("No se puede conseguir localización");
+			console.log("No se puede conseguir localización");
 		}
+		console.error("errr"+err);
+
+		//Send default position (spain)
+		_onSuccess(_defaulPosition);
 	};
 
 	var _userPos = function(position){
@@ -117,7 +122,9 @@ LUNGO.Sugar.Geolocation = (function(lng, undefined) {
 	var getPos = function(callback){
 		navigator.geolocation.getCurrentPosition(function(userPos){
 			callback(userPos);
-		}, _onError);
+		}, function(posErr){
+			callback(posErr);
+		});
 	};
 	
 	return {
