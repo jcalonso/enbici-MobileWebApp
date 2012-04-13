@@ -13,7 +13,30 @@ var App = (function(lng, undefined) {
 
 	//var lang = lng.App.get('language').split("-");
 	lng.Sugar.Language.get('es');
-    
+
+    //Android PhoneGap
+    //Backbutton
+    // document.addEventListener("backbutton", backKeyDown, true); 
+    //     function backKeyDown() { 
+    //          // Call my back key code here.
+    //         if(lng.Router.History.current() === '#main')
+    //         {
+    //             navigator.app.exitApp();
+    //         }
+    //         else{
+    //             lng.Router.back();
+    //         }
+    //     }
+
+    // //MenuButton
+    // document.addEventListener("menubutton", onMenuKeyDown, false);
+
+    // function onMenuKeyDown() {
+    //     // Handle the menu buton
+    //     lng.Router.section('preferencesView');
+    //     App.Services.obtProviders();
+    // }
+        
 
     return {
 

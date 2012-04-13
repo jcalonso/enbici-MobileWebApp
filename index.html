@@ -17,7 +17,7 @@
     <link rel="apple-touch-icon-precomposed" href="assets/images/Icon.png">
     <link rel="apple-touch-startup-image" href="assets/images/Default.png">
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="./lungo.js/lungo-1.1.2.min.css">
+    <link rel="stylesheet" href="./lungo.js/lungo-1.2.css">
     <link rel="stylesheet" href="./lungo.js/lungo.theme.default.css">
     <link rel="stylesheet" href="./assets/stylesheets/enbici.theme.css">
     <link rel="stylesheet" href="./lungo.js/sugars/Growl/lungo.sugar.growl.css">
@@ -119,7 +119,9 @@
         </header>
 
 
-        <article id="enbici-providersView" class="list scrollable"></article>
+        <article id="enbici-providersView" class="list">
+            <ul id="enbici-providersView-data"></ul>
+        </article>
 
 
     </section>  
@@ -138,7 +140,7 @@
             <div class="indented">
             <ul>
                 <li data-icon="target mini">
-                    Versi&oacute;n<span class="onright">1.0 (0315)</span>
+                    Versi&oacute;n<span class="onright">1.0 (0403)</span>
                 </li>
                 <li id="optShare" data-icon="chat mini">
                     Compartir <span class="onright" id="shareBtn" ><a class="icon right mini "></a></span>
@@ -159,8 +161,9 @@
     </section>  
 
 
-	<!-- LungoJS (Production mode) -->
-    <script src="lungo.js/lungo-1.1.2.packed.js"></script>
+	<!-- LungoJS (Dev mode) -->
+    
+    <script src="lungo.js/lungo-1.2.packed.js"></script>
 	<!-- set sensor to true if your are running me from a mobile device -->
 	<script src="http://maps.google.com/maps/api/js?sensor=false&&amp;v=3.6"></script>
 	<script src="lungo.js/sugars/geolocation/lungo.sugar.geolocation.js"></script>

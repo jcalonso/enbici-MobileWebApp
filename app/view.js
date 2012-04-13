@@ -31,11 +31,8 @@ App.View = (function(lng, app, undefined) {
  
 
 	var providers = function(providers) {
-		lng.View.Template.List.create({
-        container_id: 'enbici-providersView',
-        template_id: 'providersListView-tmp',
-        data: providers
-        });
+		lng.View.Template.render('#enbici-providersView-data','providersListView-tmp',providers);
+		lng.View.Scroll.init('enbici-providersView');
 	};
 	
     var stationDetail = function(id_station) {
@@ -72,11 +69,7 @@ App.View = (function(lng, app, undefined) {
     var favorites = function(){
     	lng.Data.Sql.select('favorites',null,function(result){
     		if(result.length > 0){
-    			lng.View.Template.List.create({
-    				container_id: 'enbici-favourites',
-    				template_id: 'favoritesList-tmp',
-    				data:result
-    			});
+    			lng.View.Template.render('#enbici-favourites','favoritesList-tmp',result);
     		}            
         });
     }	

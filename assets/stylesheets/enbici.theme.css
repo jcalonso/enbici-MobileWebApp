@@ -1,5 +1,5 @@
 
-/*Rewrited styles from lungojs defaul jss*/
+/*Rewrited styles from lungojs default theme css*/
 .list .anchor {
   background: #9FDDF7;
   color: #0E87C6;
@@ -79,4 +79,10 @@ word-wrap: break-word;
 
 .infoWindow .infoWindowsStationData{
 	padding-left:5px;
+}
+
+nav a img{
+	width:37px;
+	height:37px;
+	top:-1px !important;
 }

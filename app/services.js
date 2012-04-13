@@ -2,7 +2,7 @@ App.Services = (function(lng, app, undefined) {
 
 
 
-//var enbiciApi = "http://192.168.1.12/";
+// var enbiciApi = "http://192.168.1.85/";
 var enbiciApi = "http://enbici.trifase.net/api/";
 
 var obtStationsStatus = function(id_service) {
@@ -45,8 +45,8 @@ var obtStationsStatus = function(id_service) {
 				//Clean table
 				lng.Data.Sql.drop('stationsStatus');
 				App.Data.cacheStationsStatus(response.Stations);
-				lng.View.Template.binding('enbici-listView-data', 'stationsListView-tmp', stations);
-				lng.View.Scroll.create('enbici-listView');
+				lng.View.Template.render('#enbici-listView-data', 'stationsListView-tmp', stations);
+				lng.View.Scroll.init('enbici-listView');
 
 			}
 		);
@@ -76,7 +76,7 @@ var obtProviders = function() {
 				'lng':userLng,
 			},
 			function(response){
-				//console.error(response);
+				// console.error(response);
 				var providersList = response;
 				for (index in providersList) {
 				    //Check if the stations are geolocated if is  1-> On or 0 -> Off"
