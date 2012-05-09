@@ -42,8 +42,8 @@ App.View = (function(lng, app, undefined) {
 
                 lng.dom('#stationDetailID').attr("value",data.id_station);
                 lng.dom('#stationName').html(data.stationName);
-                lng.dom('#availablebikes').html(data.availablebikes);
-                lng.dom('#availableSlots').html(data.availableSlots);
+                lng.dom('#availablebikes').html(String(data.availablebikes));
+                lng.dom('#availableSlots').html(String(data.availableSlots));
                 lng.dom('#stationDistance').html(data.distance+" kms");
                 
                 var iconImg;
