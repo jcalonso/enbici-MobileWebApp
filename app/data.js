@@ -47,7 +47,8 @@ App.Data = (function(lng, app, undefined) {
             name:'preferences',
             drop:false,
             fields:{
-                id_service: "INT"
+                id_service: "INT",
+                geoLocStations:"STRING"
             }
         }
 
@@ -66,9 +67,9 @@ App.Data = (function(lng, app, undefined) {
 
     };
 
-    var saveDefaultProvider = function(id_service){
+    var saveDefaultProvider = function(id_service,geoLocStations){
         lng.Data.Sql.drop('preferences');
-        lng.Data.Sql.insert('preferences',id_service);
+        lng.Data.Sql.insert('preferences',{id_service:id_service,geoLocStations:geoLocStations});
     };
 
     var addFavoriteStation = function(id_station){

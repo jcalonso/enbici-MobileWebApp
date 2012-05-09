@@ -2,10 +2,10 @@ App.Services = (function(lng, app, undefined) {
 
 
 
-// var enbiciApi = "http://192.168.1.85/";
+ //var enbiciApi = "http://localhost/";
 var enbiciApi = "http://enbici.trifase.net/api/";
 
-var obtStationsStatus = function(id_service) {
+var obtStationsStatus = function(id_service,geoLocStations) {
 	LUNGO.Sugar.Geolocation.getPos(function(userPos){
 			
 			var userLat ="";
@@ -14,6 +14,10 @@ var obtStationsStatus = function(id_service) {
 				userLat = "";
 				userLng = "";
 				LUNGO.Sugar.Growl.notify(lng.Sugar.Language.label('location_unavailable'), lng.Sugar.Language.label('imposible_proximity'), 'warning', 'alert', 3);
+			}
+			else if(geoLocStations === false){
+				userLat = "";
+				userLng = "";
 			}
 			else{
 				userLat = userPos.coords.latitude;

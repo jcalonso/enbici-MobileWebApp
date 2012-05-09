@@ -13,7 +13,7 @@ App.Events = (function(lng, app, undefined) {
 					lng.Data.Sql.select('providers',{id_service:result[0].id_service,geoLocStations:'pushpin'},function(result2){
 						if(result2.length > 0){
 							//Geolocated stations
-							App.Services.obtStationsStatus(result[0].id_service);
+							App.Services.obtStationsStatus(result[0].id_service,true);
 							LUNGO.Sugar.Growl.hide();
 						}
 						else
@@ -21,7 +21,7 @@ App.Events = (function(lng, app, undefined) {
 							//No geolocated
 							lng.dom('#btnShowMapView').hide(); //No map view button for the user
 							lng.dom('#stationDetailMap').hide();
-							App.Services.obtStationsStatus(result[0].id_service,false,false);
+							App.Services.obtStationsStatus(result[0].id_service,false);
 							LUNGO.Sugar.Growl.hide();
 						}
 					});
@@ -53,7 +53,8 @@ App.Events = (function(lng, app, undefined) {
 		lng.Data.Sql.select('preferences',null,function(result){
 			
 			if(result.length > 0){
-				App.Services.obtStationsStatus(result[0].id_service);
+				var geoLocStations = result[0].geoLocStations === 'pushpin' ? true : false ;
+				App.Services.obtStationsStatus(result[0].id_service,geoLocStations);
 			}
 			else{
 				//Show notification
@@ -162,6 +163,7 @@ App.Events = (function(lng, app, undefined) {
 		var stationID = lng.dom(this);
 		
 		var cleanStationID = stationID.attr('id').split("-");
+
 			
 		App.View.stationDetail(cleanStationID[1]);
 				
@@ -179,7 +181,9 @@ App.Events = (function(lng, app, undefined) {
 		var providerID = lng.dom(this);
 		var cleanProviderID = providerID.attr('id').split("-");
 
-		App.Data.saveDefaultProvider([{id_service:cleanProviderID[1]}]);
+		var geoLocated = $$('span .icon', providerID).hasClass('pushpin') ? 'pushpin' : 'warning';
+
+		App.Data.saveDefaultProvider(cleanProviderID[1],geoLocated);
 		lng.dom('p', this).hide();
 
         $$(this).children('.check').show();
