@@ -4,7 +4,7 @@ var App = (function(lng, undefined) {
     
     lng.App.init({
         name: 'enbici',
-        version: '1.0 (0315)',
+        version: '1.0.1 (0510)',
         language : navigator.language
     });
 
