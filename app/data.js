@@ -1,8 +1,8 @@
 App.Data = (function(lng, app, undefined) {
 
     lng.Data.Sql.init({
-    	name: 'enbici-cache',
-    	version:'1.0',
+    	name: 'enbici-cache-2',
+    	version:'1.0.1',
     	schema:[{
     		name:'providers',
     		drop:false,
@@ -48,7 +48,7 @@ App.Data = (function(lng, app, undefined) {
             drop:false,
             fields:{
                 id_service: "INT",
-                geoLocStations:"STRING"
+                geoLocStations: "STRING"
             }
         }
 
@@ -103,7 +103,6 @@ App.Data = (function(lng, app, undefined) {
             }      
         });    
     };
-
 
     return {
     	cacheProviders:cacheProviders,
